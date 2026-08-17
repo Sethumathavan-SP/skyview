@@ -32,14 +32,22 @@ Given a flight (by flight number for today, or by origin/destination airport for
 
 ---
 
+## Handling flights on other dates
+
+The AviationStack free tier only returns **real-time / currently scheduled** flights — it does not provide historical or future-date schedules. Rather than treating this as a limitation, Skyview handles it with a deliberate architecture choice:
+
+- **For today's date:** Enter an IATA flight number (e.g., `UA2369`). Skyview calls AviationStack to get the live route and departure time, then computes the recommendation.
+- **For any other date (past or future):** The form automatically switches to **origin/destination airport search**. You type an airport name, city, or IATA code (e.g., "London", "JFK", "Chennai") and get instant autocomplete suggestions resolved **locally** against the bundled **OpenFlights dataset (6,072 airports)** — no external API call needed for this path.
+- **The recommendation engine is identical** in both cases: great-circle path + sun position at interpolated timestamps. The user never needs to know why the form changed; they just pick a date and the right input appears.
+
+---
+
 ## Two Search Modes
 
 | Date selected | Mode | Input | Endpoint |
 |---------------|------|-------|----------|
 | **Today** | Live flight lookup | IATA flight number (e.g., `UA2369`) | `POST /flight-recommend` |
 | **Any future/past date** | Manual airport search | Origin & destination airport names/city/IATA (autocomplete) + departure time | `POST /recommend` |
-
-**Why the split?** The AviationStack free tier only provides **real-time / currently scheduled** flights. It does not support historical or future-date lookups. For dates other than today, the user manually picks airports and a departure time, and Skyview computes the recommendation from great-circle geometry alone.
 
 ---
 
@@ -152,12 +160,11 @@ Open **http://localhost:5173** in your browser.
 
 ## Known Limitations
 
-1. **AviationStack free tier** — Only returns currently scheduled/active flights. No historical or future-date lookups. This is why the UI restricts flight-number mode to **today's date only**.
-2. **Tie-breaker defaults to left** — When left/right scores are exactly equal, the algorithm picks `left` (see `recommender.py:150`).
-3. **Great-circle approximation** — Real flights follow ATC routes, not perfect great circles. Waypoints are illustrative.
-4. **No live position** — The plane marker animates along the computed path by time-fraction, not real radar data.
-5. **Sun elevation ideal range** — Heuristic: −2° to +6° is "ideal", −6° to +10° is "good". Subject to tuning.
-6. **Single flight per IATA code** — If multiple flights share the same IATA number on a day, takes the first result.
+1. **Tie-breaker defaults to left** — When left/right scores are exactly equal, the algorithm picks `left` (see `recommender.py:150`).
+2. **Great-circle approximation** — Real flights follow ATC routes, not perfect great circles. Waypoints are illustrative.
+3. **No live position** — The plane marker animates along the computed path by time-fraction, not real radar data.
+4. **Sun elevation ideal range** — Heuristic: −2° to +6° is "ideal", −6° to +10° is "good". Subject to tuning.
+5. **Single flight per IATA code** — If multiple flights share the same IATA number on a day, takes the first result.
 
 ---
 
