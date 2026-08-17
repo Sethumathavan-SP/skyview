@@ -1,0 +1,7 @@
+fastapi
+uvicorn[standard]
+geopy
+astral
+python-multipart
+pydantic
+python-dotenv

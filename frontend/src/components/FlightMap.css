@@ -1,0 +1,151 @@
+.flight-map-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.flight-map {
+  height: 400px;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.flight-map-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  background: #f9fafb;
+  border-radius: 12px;
+  color: #6b7280;
+  font-size: 1rem;
+}
+
+.flight-map-controls {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.slider-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.slider-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+.flight-scrubber {
+  width: 100%;
+  height: 6px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: #e5e7eb;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+}
+
+.flight-scrubber::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #1e3a8a;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.1s, background 0.2s;
+}
+
+.flight-scrubber::-webkit-slider-thumb:hover {
+  background: #1e40af;
+  transform: scale(1.1);
+}
+
+.flight-scrubber::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: #1e3a8a;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.waypoint-info {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  font-size: 0.875rem;
+}
+
+.waypoint-info strong {
+  color: #1a1a2e;
+  min-width: 160px;
+}
+
+.waypoint-info span {
+  color: #4b5563;
+  background: #f9fafb;
+  padding: 0.375rem 0.75rem;
+  border-radius: 9999px;
+  font-family: monospace;
+}
+
+.side-badge {
+  font-weight: 600;
+  padding: 0.375rem 0.75rem;
+  border-radius: 9999px;
+  text-transform: capitalize;
+}
+
+.side-badge.left {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.side-badge.right {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.side-badge.none {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+/* Plane marker animation */
+.plane-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.plane-icon {
+  font-size: 24px;
+  animation: plane-bob 1.5s ease-in-out infinite;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+@keyframes plane-bob {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50% { transform: translateY(-4px) rotate(5deg); }
+}
+
+/* Origin and destination markers */
+.origin-icon, .dest-icon {
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

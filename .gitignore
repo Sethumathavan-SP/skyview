@@ -1,0 +1,35 @@
+# Environment files
+backend/.env
+
+# Python
+**/__pycache__/
+*.pyc
+
+# Virtual environments
+backend/venv/
+
+# Node
+frontend/node_modules/
+frontend/dist/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Screenshots
+screenshots/
+
+# Playwright
+.playwright-mcp/
+
+# Root node_modules (if any)
+node_modules/
