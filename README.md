@@ -221,9 +221,3 @@ Skyview/
 ├── .gitignore
 └── README.md
 ```
-
----
-
-## License
-
-MIT — free to use, modify, and distribute.
